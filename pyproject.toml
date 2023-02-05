@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "chatbot-tg"
+version = "0.1.0"
+description = ""
+authors = ["cucuridas@gamil.com <3310223@naver.com>"]
+readme = "README.md"
+packages = [{include = "chtbot_tg"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.89.1"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+elasticsearch = "^8.6.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

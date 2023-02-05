@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  elastic_node:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+    container_name: elasticsearch
+    enviroment:
+      - http.port: 9200
+      - transport.port: 9300
+      - discovery.type: single-node
+      - xpack.security.enabled: false

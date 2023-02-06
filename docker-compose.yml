@@ -26,6 +26,8 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+    volumes:
+      - ./Elasticsearch:/usr/share/elasticsearch/config/analysis
     restart: always
 networks:
   redis:

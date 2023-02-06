@@ -1,5 +1,5 @@
 import uvicorn
-from service.webhook import WebexHook
+from service.webex import WebexHook
 
 
 def main():

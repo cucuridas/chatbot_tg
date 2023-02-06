@@ -67,5 +67,10 @@ class Messages:
 
         return json.loads(response.text)
 
-    def postMessage(self, value):
-        pass
+    def postMessage(self, roomId, value):
+        data = {"roomId": roomId, "markdown": value}
+        header = self.header
+        header.setdefault("Accept", "application/json")
+        response = requests.post(url=self.url, data=json.dumps(data), headers=header)
+        response.raise_for_status()
+        return "Success"

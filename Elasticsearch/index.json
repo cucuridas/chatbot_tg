@@ -1,0 +1,41 @@
+{
+    "settings": {
+        "index": {
+            "analysis": {
+                "analyzer": {
+                    "synonym_test": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "lowercase",
+                            "synonym"
+                        ]
+                    }
+                },
+                "filter": {
+                    "synonym": {
+                        "type": "synonym",
+                        "synonyms_path": "analysis/synonym.txt"
+                    }
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "service": {
+                "type": "text",
+                "analyzer": "synonym_test",
+                "search_analyzer": "synonym_test",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "service_code": {
+                "type": "long"
+            }
+        }
+    }
+}

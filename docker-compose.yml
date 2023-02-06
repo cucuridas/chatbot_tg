@@ -14,6 +14,19 @@ services:
     restart: always
     command: redis-server --appendonly yes --appendfsync everysec
     user: "${USER_ID}:${GROUP_ID}"
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+    environment:
+      - discovery.type=single-node
+      - http.port=9200
+      - transport.port=9300
+      - xpack.security.enabled=false
+    ports:
+      - 9200:9200
+      - 9300:9300
+    restart: always
 networks:
   redis:
     driver: bridge

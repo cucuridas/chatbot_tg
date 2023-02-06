@@ -1,10 +1,19 @@
-version: '3.8'
+# docker compose  --- 노출포트 16379 로 함
+version: '3'
 services:
-  elastic_node:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
-    container_name: elasticsearch
-    enviroment:
-      - http.port: 9200
-      - transport.port: 9300
-      - discovery.type: single-node
-      - xpack.security.enabled: false
+  redis:
+    container_name: redis
+    image: 'redis:7'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PASSWORD=
+    ports:
+      - '16379:6379'
+    networks:
+      - redis
+    restart: always
+    command: redis-server --appendonly yes --appendfsync everysec
+    user: "${USER_ID}:${GROUP_ID}"
+networks:
+  redis:
+    driver: bridge

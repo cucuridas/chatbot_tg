@@ -1,6 +1,7 @@
 import abc
 
-class connect(metaclass=abc.ABCMeta):
+
+class Connect(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def getConenction(self):
         pass

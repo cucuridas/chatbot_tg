@@ -1,0 +1,13 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg/chatbot_tg")
+from chatbot_tg.service.webex import WebexHook, Messages
+
+if __name__ == "__main__":
+    # print(WebexHook().addHook())
+    # WebexHook().checkHook()
+
+    # Messages().getMessage(
+    #     "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL01FU1NBR0UvZDJmZmJkMzAtYTVlNi0xMWVkLWJmM2YtMzM4MWI5NTI4ZDFi"
+    # )

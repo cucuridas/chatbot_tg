@@ -46,3 +46,26 @@ class WebexHook:
             return False
         else:
             return True
+
+
+class Messages:
+    """
+    webex를 통한 event 발생 시 message 처리를 위한 클래스입니다
+    """
+
+    def __init__(self) -> None:
+        self.url = "{}messages".format(Settings.WEBEX_API)
+        self.header = {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + Settings.WEBEX_BOT_TOKEN,
+        }
+
+    def getMessage(self, dataId):
+        url = "{}/{}".format(self.url, dataId)
+        response = requests.get(url=url, headers=self.header)
+        response.raise_for_status()
+
+        return json.loads(response.text)
+
+    def postMessage(self, value):
+        pass

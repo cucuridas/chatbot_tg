@@ -1,5 +1,5 @@
-from chatbot_tg.core.config import Settings
-from chatbot_tg.abstract.connAbstract import Connect
+from core.config import Settings
+from abstract.connAbstract import Connect
 import redis
 
 

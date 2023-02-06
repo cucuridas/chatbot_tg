@@ -1,7 +1,9 @@
 import uvicorn
+from service.webhook import WebexHook
 
 
 def main():
+    WebexHook().addHook()
     uvicorn.run(app="core.server:app")
 
 

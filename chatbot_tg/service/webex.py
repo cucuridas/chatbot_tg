@@ -25,6 +25,7 @@ class WebexHook:
             "targetUrl": Settings.WEBHOOK_URL,
             "resource": "messages",
             "event": "created",
+            "filter": "personEmail=3310223@naver.com",
         }
 
         response = requests.post(url=self.url, headers=self.header, data=json.dumps(self.data))
@@ -69,8 +70,8 @@ class Messages:
 
     def postMessage(self, roomId, value):
         data = {"roomId": roomId, "markdown": value}
-        header = self.header
-        header.setdefault("Accept", "application/json")
-        response = requests.post(url=self.url, data=json.dumps(data), headers=header)
+        # header = self.header
+        # header.setdefault("Accept", "application/json")
+        response = requests.post(url=self.url, data=json.dumps(data), headers=self.header)
         response.raise_for_status()
         return "Success"

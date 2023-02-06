@@ -11,7 +11,7 @@ async def result(request: Request):
     result = await request.json()
     messageObj = Messages()
     message = messageObj.getMessage(result["data"]["id"])
-    # messageObj.postMessage(message["roomId"], message["text"])
+    messageObj.postMessage(message["roomId"], message["text"])
     print(message["text"])
 
     return logging.info("됨")

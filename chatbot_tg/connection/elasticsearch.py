@@ -1,6 +1,6 @@
 from core.config import Settings
 from abstract.connAbstract import Connect
-from elasticsearch import Elasticsearch
+from elasticsearch import AsyncElasticsearch
 
 
 class ElasticsearchConnection(Connect):
@@ -10,7 +10,7 @@ class ElasticsearchConnection(Connect):
 
     def getConenction(self):
         host = "http://{}:{}".format(Settings.ELASTCSEARCH_HOST, Settings.ELASTCSEARCH_PORT)
-        self.conn = Elasticsearch(hosts=host, timeout=180)
+        self.conn = AsyncElasticsearch(hosts=host, timeout=180)
         return self.conn
 
     def checkConnection(self):

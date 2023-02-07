@@ -1,4 +1,5 @@
 from connection.elasticsearch import ElasticsearchConnection
+from service.parsing import ParsingData
 
 
 class ElasticClient:
@@ -10,12 +11,14 @@ class Match(ElasticClient):
     def __init__(self) -> None:
         super().__init__()
 
-    def match(self, inputText):
+    async def match(self, inputText):
         query = {"match": {"service": inputText}}
-        self.result = self.conn.search(index="service_index", query=query)
+        result = await self.conn.search(index="service_index", query=query)
+        self.result = result["hits"]["hits"]
+        return await self.checkResult()
 
-    def checkResult(self):
-        if len(self.result["hits"]["hits"]) > 0:
-            return True
+    async def checkResult(self):
+        if len(self.result) > 0:
+            return ParsingData.parseElastic(self.result)
         else:
-            return False
+            return None

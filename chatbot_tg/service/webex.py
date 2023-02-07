@@ -25,7 +25,6 @@ class WebexHook:
             "targetUrl": Settings.WEBHOOK_URL,
             "resource": "messages",
             "event": "created",
-            "filter": "personEmail=3310223@naver.com",
         }
 
         response = requests.post(url=self.url, headers=self.header, data=json.dumps(self.data))

@@ -3,7 +3,7 @@ import sys
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg/chatbot_tg")
 
-from chatbot_tg.connection.elasticsearch import ElasticsearchConnection
+from app.connection.elasticsearch import ElasticsearchConnection
 import logging
 
 

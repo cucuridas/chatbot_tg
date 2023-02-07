@@ -1,5 +1,5 @@
-from core.config import Settings
-from service.redis import RedisClient
+from app.core.config import Settings
+from app.service.redis import RedisClient
 import requests, json
 import logging
 

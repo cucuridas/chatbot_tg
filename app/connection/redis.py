@@ -1,5 +1,5 @@
-from core.config import Settings
-from abstract.connAbstract import Connect
+from app.core.config import Settings
+from app.abstract.connAbstract import Connect
 import redis
 
 

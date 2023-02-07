@@ -2,7 +2,7 @@ import sys
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 
-from chatbot_tg.connection.redis import RedisConnection
+from app.connection.redis import RedisConnection
 import logging
 
 

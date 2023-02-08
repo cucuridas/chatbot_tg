@@ -18,7 +18,7 @@ class Tgday:
         elif id == "2":
             return
 
-    async def registTgDay(message, roomId, conn=None):
+    async def service(message, roomId, conn=None):
         redis_value = CONN.getContent(roomId)
         date = datetime.strptime(redis_value["created"], "%Y-%m-%dT%H:%M:%S.%fz")
         data = {

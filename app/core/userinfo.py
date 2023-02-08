@@ -1,3 +1,8 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
+
+
 class User:
     USER_INFO = {
         "3310223@naver.com": "최충은",

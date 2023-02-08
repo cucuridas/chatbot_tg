@@ -1,3 +1,6 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from fastapi import APIRouter, Request, Body, Depends, Path
 from app.service.tgday import Tgday
 from app.core.config import Settings
@@ -17,22 +20,23 @@ async def result(request: Request):
     if result["data"]["personEmail"] != Settings.WEBEX_BOT_EMAIL:
         # 메세지 내용 파싱
         message = messageObj.getMessage(result["data"]["id"])
-        if (
-            ChatbotService.checkRedisService(result["data"]["roomId"]) != None
-            and message["text"] != "no"
-        ):
+        # 해당 구문에서 캐시에 저장되어진 서비스 정보 유무와,서비스 별 입력 값  validation 필요
+        room_info = ChatbotService.checkRedisService(result["data"]["roomId"])
+        if room_info != None and ChatbotService.checkValidation(Tgday, message["text"]):
             await Tgday.registTgDay(message["text"], message["roomId"], messageObj)
             ControllRoominfo.deleteRoominfo(message["roomId"])
         else:
             if message["text"] == "no":
-                ChatbotService.replayService(message["roomId"], messageObj, messageObj)
+                ChatbotService.replayService(message["roomId"], messageObj)
                 ControllRoominfo.deleteRoominfo(message["roomId"])
+            elif room_info != None:
+                ChatbotService.notCorrectValue(message["roomId"], messageObj, "tgday")
             else:
                 # room 정보 메모리에 저장
                 ControllRoominfo.registRoominfo(result)
                 # 서비스 정보 업데이트
                 value = await Match().match(message["text"])
-                ControllRoominfo.updateRoominfo(message["roomId"], value)
+                ControllRoominfo.addServiceRoominfo(message["roomId"], value)
                 # 결과 전송
                 ChatbotService.checkService(message["roomId"], value, conn=messageObj)
 

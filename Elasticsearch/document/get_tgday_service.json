@@ -1,4 +1,4 @@
 {
-    "service": "TGday 조회",
+    "service": "getTgday",
     "service_code": 1
 }

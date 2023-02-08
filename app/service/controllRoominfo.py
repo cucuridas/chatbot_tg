@@ -1,3 +1,6 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from datetime import timedelta
 import json
 from app.service.parsing import ParsingData
@@ -12,7 +15,7 @@ class ControllRoominfo:
         CONN.setContent(key, value, timedelta(minutes=3))
         return "Success"
 
-    def updateRoominfo(key, serviceInfo: dict):
+    def addServiceRoominfo(key, serviceInfo: dict):
         if serviceInfo == None:
             return "None value"
         else:

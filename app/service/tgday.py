@@ -1,7 +1,11 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.service.elasticsearch import Match, Document
 from app.service.redis import RedisClient
 from app.core.userinfo import User
 from datetime import datetime
+import re
 
 CONN = RedisClient(1)
 
@@ -29,8 +33,9 @@ class Tgday:
             "정상적으로 등록되었습니다! 변경이 필요할 경우 'tgday'를 통해 다시 등록해주세요",
         )
 
-    async def updateTgday():
-        pass
+    def checkValue(message):
+        regex_value = re.compile(r"\d{4}\-\d{2}\-\d{2}")
+        return bool(re.search(regex_value, message))
 
     async def getTgday(personId):
         return await Document().getDocument(personId, "tgday")

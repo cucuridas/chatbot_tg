@@ -1,3 +1,8 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
+
+
 class ParsingData:
     def prseWebhook(body):
         key = body["data"]["roomId"]

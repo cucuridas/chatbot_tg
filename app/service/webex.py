@@ -1,3 +1,6 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.core.config import Settings
 from app.service.redis import RedisClient
 import requests, json

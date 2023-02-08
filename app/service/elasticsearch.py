@@ -1,3 +1,6 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.connection.elasticsearch import ElasticsearchConnection
 from app.service.parsing import ParsingData
 

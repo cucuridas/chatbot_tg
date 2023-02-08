@@ -1,3 +1,6 @@
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 import uvicorn
 from service.webex import WebexHook
 

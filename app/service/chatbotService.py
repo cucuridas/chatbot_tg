@@ -1,4 +1,7 @@
 import json
+import sys
+
+sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.service.elasticsearch import Match, Document
 from app.service.parsing import ParsingData
 from app.service.redis import RedisClient
@@ -27,3 +30,12 @@ class ChatbotService:
 
     def replayService(roomId, conn):
         conn.postMessage(roomId, "새로운 서비스를 입력해주세요~")
+
+    def checkValidation(servicename, message):
+        return servicename.checkValue(message)
+
+    def notCorrectValue(roomId, conn, service):
+        return conn.postMessage(
+            roomId,
+            f"'{service}' 서비스에 맞지 않는 값이 입력되었어요!\n 다시 입력해주세요~\n 원하시는 서비스가 아닐 경우 'no'를 입력해주세요 ",
+        )

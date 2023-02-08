@@ -8,6 +8,7 @@ from datetime import datetime
 import re
 
 CONN = RedisClient(1)
+SERVICE_NAME = "tgday"
 
 
 class Tgday:
@@ -39,3 +40,10 @@ class Tgday:
 
     async def getTgday(personId):
         return await Document().getDocument(personId, "tgday")
+
+
+class GetTgday:
+    def getTgdayInfo(personId):
+        value = Document().getDocument(SERVICE_NAME, personId)
+
+        return value

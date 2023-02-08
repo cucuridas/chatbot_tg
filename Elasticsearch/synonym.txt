@@ -1,3 +1,8 @@
 티지데이 => tgday
 TG day => tgday
 티지 데이 => tgday
+티지데이 조회 => getTgday
+조회 티지데이 => getTgday
+Get tgday => getTgday
+GetTgday => getTgday
+tgday Get => getTgday

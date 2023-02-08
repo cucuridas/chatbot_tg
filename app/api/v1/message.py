@@ -2,7 +2,7 @@ import sys
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from fastapi import APIRouter, Request, Body, Depends, Path
-from app.service.tgday import Tgday
+from app.service.tgday import Tgday, GetTgday
 from app.core.config import Settings
 import logging, json
 from app.service.webex import Messages

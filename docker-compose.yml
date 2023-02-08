@@ -14,7 +14,6 @@ services:
     restart: always
     command: redis-server --appendonly yes --appendfsync everysec
 
-
   elasticsearch:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
@@ -29,6 +28,7 @@ services:
       - 9300:9300
     volumes:
       - ./Elasticsearch:/usr/share/elasticsearch/config/analysis
+    command: ./bin/elasticsearch-plugin install analysis-nori
     restart: always
 networks:
   redis:

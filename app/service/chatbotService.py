@@ -5,11 +5,15 @@ sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.service.elasticsearch import Match, Document
 from app.service.parsing import ParsingData
 from app.service.redis import RedisClient
+from app.service.tgday import Tgday, GetTgday
+
 
 CONN = RedisClient(1)
 
 
 class ChatbotService:
+    service_value = {"tgday": Tgday, "gettgday": GetTgday}
+
     def checkService(roomId, value, conn=None):
         if value is None:
             return conn.postMessage(roomId, "확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~")

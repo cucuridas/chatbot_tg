@@ -20,11 +20,14 @@ class ChatbotService:
             return conn.postMessage(roomId, "확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~")
         else:
             result = value["service"]
-            ControllRoominfo.addServiceRoominfo(roomId, value)
+            redis_value = ControllRoominfo.addServiceRoominfo(roomId, value)
             return conn.postMessage(
                 roomId,
-                f"요청하신 서비스가 '{result}' 인듯해요!\n 맞으시면 날짜를 입력해주시고 [ex]2022-02-07\n 아니시라면 no[소문자]를 입력해주세요",
+                f"요청하신 서비스가 '{result}' 인듯해요!\n {ChatbotService.returnMessage(SERVICE_VALUE[result],redis_value)} \n 아니시라면 no[소문자]를 입력해주세요",
             )
+
+    def returnMessage(service, value):
+        return service.returnMessage(value)
 
     def checkRedisService(roomId):
         value = CONN.getContent(roomId)

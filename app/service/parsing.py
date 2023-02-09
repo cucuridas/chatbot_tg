@@ -13,3 +13,6 @@ class ParsingData:
 
     def parseElastic(hits):
         return hits[0]["_source"]
+
+    def parseDocument(value):
+        return value["_source"]

@@ -5,6 +5,7 @@ from app.service.elasticsearch import Match, Document
 from app.service.redis import RedisClient
 from app.core.userinfo import User
 from datetime import datetime
+from app.service.parsing import ParsingData
 import re
 
 CONN = RedisClient(1)
@@ -41,9 +42,14 @@ class Tgday:
     async def getTgday(personId):
         return await Document().getDocument(personId, "tgday")
 
+    def returnMessage(value):
+        return "맞으시면 날짜를 입력해주시고 [ex]2022-02-07\n"
+
 
 class GetTgday:
-    def getTgdayInfo(personId):
-        value = Document().getDocument(SERVICE_NAME, personId)
+    async def returnMessage(value):
+        value = await GetTgday.getTgdayInfo(value["personId"])
 
-        return value
+    async def getTgdayInfo(personId):
+        value = await Document().getDocument(SERVICE_NAME, personId)
+        return ParsingData.parseDocument(value)

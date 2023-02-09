@@ -22,7 +22,7 @@ class ControllRoominfo:
             value = CONN.getContent(key)
             value.update(serviceInfo)
             CONN.setContent(key, value, timedelta(minutes=3))
-            return "Success"
+            return value
 
     def deleteRoominfo(key):
         CONN.delContent(key)

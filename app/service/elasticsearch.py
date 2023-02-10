@@ -43,10 +43,12 @@ class Document(ElasticClient):
         super().__init__()
 
     async def getDocument(self, id, index):
-        if await self.conn.exists(index=index, id=id):
-            return None
-        else:
+        if await self.conn.indices.exists(index=index) and await self.conn.exists(
+            index=index, id=id
+        ):
             return await self.conn.get(index=index, id=id)
+        else:
+            return None
 
     async def putDocument(self, index, data):
         if await self.conn.indices.exists(index=index):

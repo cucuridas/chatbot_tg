@@ -45,12 +45,18 @@ class GetTgday:
     async def returnMessage(value):
         result_value = await GetTgday.getTgdayInfo(value["personId"])
         ControllRoominfo.deleteRoominfo(value["roomId"])
-        day_info = result_value["regist_date"]
-        return f"</br> <h4>등록하신 TG day 날짜는 '{day_info}' 입니다<h4> "
+        if result_value != None:
+            day_info = result_value["regist_date"]
+            return f"</br> <h4>등록하신 TG day 날짜는 '{day_info}' 입니다<h4> "
+        else:
+            return f"</br> <h4> 등록하신 TG day가 존재하지 않아요! 'tgday' 서비스를 통해 등록해주세요!<h4>"
 
     async def getTgdayInfo(personId):
         value = await Document().getDocument(personId, SERVICE_NAME)
-        return ParsingData.parseDocument(value)
+        if value == None:
+            return None
+        else:
+            return ParsingData.parseDocument(value)
 
     async def getAllTgdayInfo():
         values = await Match().serarch("tgday")

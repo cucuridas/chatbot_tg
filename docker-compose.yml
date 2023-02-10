@@ -28,7 +28,7 @@ services:
       - 9300:9300
     volumes:
       - ./Elasticsearch:/usr/share/elasticsearch/config/analysis
-    command: ./bin/elasticsearch-plugin install analysis-nori
+    #command: ./bin/elasticsearch-plugin install analysis-nori
     restart: always
 networks:
   redis:

@@ -15,7 +15,7 @@ class ChatbotService:
     async def checkService(roomId, message, conn=None):
         value = await Match().match(message)
         if value is None:
-            return conn.postMessage(roomId, "확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~")
+            return conn.postMessage(roomId, "</br> <h4>확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~<h4>")
         else:
             result = value["service"]
             redis_value = ControllRoominfo.addServiceRoominfo(roomId, value)
@@ -52,7 +52,7 @@ class ChatbotService:
     def notCorrectValue(roomId, conn, service):
         return conn.postMessage(
             roomId,
-            f"'{service}' 서비스에 맞지 않는 값이 입력되었어요!\n 다시 입력해주세요~\n 원하시는 서비스가 아닐 경우 'no'를 입력해주세요 ",
+            f"'{service}'</br> <h4> 서비스에 맞지 않는 값이 입력되었어요!\n 다시 입력해주세요~\n 원하시는 서비스가 아닐 경우 'no'를 입력해주세요 <h4>",
         )
 
     async def provideService(service, message, roomId, conn):

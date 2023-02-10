@@ -24,9 +24,16 @@ class Match(ElasticClient):
         self.result = result["hits"]["hits"]
         return await self.checkResult()
 
+    async def serarch(self, index):
+        result = await self.conn.search(index=index)
+        self.result = result["hits"]["hits"]
+        return await self.checkResult()
+
     async def checkResult(self):
-        if len(self.result) > 0:
+        if len(self.result) == 1:
             return ParsingData.parseElastic(self.result)
+        elif len(self.result) > 1:
+            return ParsingData.parseElasticIter(self.result)
         else:
             return None
 

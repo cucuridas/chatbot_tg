@@ -6,3 +6,4 @@ TG day => tgday
 Get tgday => getTgday
 GetTgday => getTgday
 tgday Get => getTgday
+tgday 조회 => getTgday

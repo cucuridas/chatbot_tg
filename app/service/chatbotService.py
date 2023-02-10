@@ -1,6 +1,4 @@
-import json
 import sys
-
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.service.elasticsearch import Match, Document
@@ -10,7 +8,7 @@ from app.service.tgday import Tgday, GetTgday
 from app.service.controllRoominfo import ControllRoominfo
 
 CONN = RedisClient(1)
-SERVICE_VALUE = {None: None, "TGday": Tgday, "gettgday": GetTgday}
+SERVICE_VALUE = {None: None, "TGday": Tgday, "getTgday": GetTgday}
 
 
 class ChatbotService:
@@ -21,13 +19,16 @@ class ChatbotService:
         else:
             result = value["service"]
             redis_value = ControllRoominfo.addServiceRoominfo(roomId, value)
+            redis_value.update({"roomId": roomId})
+            return_service = await ChatbotService.returnMessage(SERVICE_VALUE[result], redis_value)
+
             return conn.postMessage(
                 roomId,
-                f"요청하신 서비스가 '{result}' 인듯해요!\n {ChatbotService.returnMessage(SERVICE_VALUE[result],redis_value)} \n 아니시라면 no[소문자]를 입력해주세요",
+                f"요청하신 서비스가 '{result}' 인듯해요!\n 요청하신 서비스가 아니시라면 no[소문자]를 입력해주세요 \n {return_service}",
             )
 
-    def returnMessage(service, value):
-        return service.returnMessage(value)
+    async def returnMessage(service, value):
+        return await service.returnMessage(value)
 
     def checkRedisService(roomId):
         value = CONN.getContent(roomId)

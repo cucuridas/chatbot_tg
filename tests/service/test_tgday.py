@@ -1,9 +1,10 @@
 import sys
+import asyncio
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 
 
-from app.service.tgday import Tgday
+from app.service.tgday import Tgday, GetTgday
 
 
-print(Tgday.checkValue("2022-03-03"))
+asyncio.run(GetTgday.getAllTgdayInfo())

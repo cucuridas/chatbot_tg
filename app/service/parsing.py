@@ -14,5 +14,8 @@ class ParsingData:
     def parseElastic(hits):
         return hits[0]["_source"]
 
+    def parseElasticIter(hits):
+        return [hit["_source"] for hit in hits]
+
     def parseDocument(value):
         return value["_source"]

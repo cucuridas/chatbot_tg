@@ -30,6 +30,20 @@ services:
       - ./Elasticsearch:/usr/share/elasticsearch/config/analysis
     #command: ./bin/elasticsearch-plugin install analysis-nori
     restart: always
+
+  postgres:
+    container_name: postgres
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=chatbot1!
+    ports:
+      - 15432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    user: "${USER_ID}:${GROUP_ID}"
+
 networks:
   redis:
     driver: bridge

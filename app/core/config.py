@@ -23,3 +23,9 @@ class Settings:
     # webhook 관련 설정
     WEBHOOK_URL: str = os.getenv("WEBHOOK_URL")
     WEBHOOK_NAME: str = os.getenv("WEBHOOK_NAME")
+    # Database 정보
+    DB_USER: str = os.getenv("DB_USER")
+    DB_PASSWROD: str = os.getenv("DB_PASSWROD")
+    DB_HOST: str = os.getenv("DB_HOST")
+    DB_PORT: str = os.getenv("DB_PORT")
+    DB_NAME: str = os.getenv("DB_NAME")

@@ -14,7 +14,7 @@ COPY . ./
 RUN poetry update
 #poetry update --no-dev # 빌드 후 젠킨스에서 test 수행하기 위해 모두 설치
 
-# 1컨테이너=1워커로 구성하고 (프로세스 매니저인 gunicorn 제거) 필요시 컨테이너 스케일아웃
-CMD poetry run uvicorn app.core.server:app --host 0.0.0.0 --port 8000
+CMD poetry run alembic upgrade head && \
+    poetry run uvicorn app.core.server:app --host 0.0.0.0 --port 8000
 #    poetry run gunicorn --bind 0.0.0.0:8000 -w 1 --timeout 120 -k uvicorn.workers.UvicornWorker app.core.server:app
 # poetry run uvicorn app.core.server:app --host 0.0.0.0 --port 8000 --workers 1

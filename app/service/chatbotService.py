@@ -1,10 +1,12 @@
 import sys
+from app.core.db.base import Session
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.service.elasticsearch import Match, Document
 from app.service.parsing import ParsingData
 from app.service.redis import RedisClient
 from app.service.tgday_db import Tgday, GetTgday
+from app.core.db.models.users import Users
 
 # from app.service.tgday import Tgday, GetTgday
 from app.service.controllRoominfo import ControllRoominfo
@@ -61,3 +63,16 @@ class ChatbotService:
         await service.service(message, roomId, conn)
         ControllRoominfo.deleteRoominfo(roomId)
         return "Success"
+
+    def checkUser(value, db: Session = Session()):
+        value = db.query(Users).filter(Users.user_email.like(value["personEmail"])).first()
+        if value == None:
+            return False
+        else:
+            return True
+
+    def userFaliMessage(value, conn):
+        return conn.postMessage(
+            value["roomId"],
+            "</br> <h4> 등록되어진 사용자 정보가 아니예요 관리자에게 말씀하셔서 사용자 등록절차를 진행해주세요!",
+        )

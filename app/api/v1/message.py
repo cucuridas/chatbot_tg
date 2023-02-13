@@ -37,9 +37,12 @@ async def result(request: Request):
             else:
                 # room 정보 메모리에 저장
                 ControllRoominfo.registRoominfo(result)
+                if ChatbotService.checkUser(message):
+                    await ChatbotService.checkService(
+                        message["roomId"], message["text"], conn=messageObj
+                    )
+                else:
+                    return ChatbotService.userFaliMessage(message, messageObj)
                 # 결과 전송
-                await ChatbotService.checkService(
-                    message["roomId"], message["text"], conn=messageObj
-                )
 
     return logging.info("됨")

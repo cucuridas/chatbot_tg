@@ -20,6 +20,11 @@ class Tgday:
         redis_value = CONN.getContent(roomId)
         year, month, day = message.split("-")
         value = db.query(Users).filter(Users.user_email.like("3310223@naver.com")).first()
+        if value == None:
+            return conn.postMessage(
+                roomId,
+                "</br> <h4> 등록되어진 사용자 정보가 아니예요 관리자에게 말씀하셔서 사용자 등록절차를 진행해주세요!",
+            )
         data = {
             "user_name": value.user_name,
             "tgday_regist_day": date(year=int(year), month=int(month), day=int(day)),

@@ -18,4 +18,4 @@ from app.core.db.base import Session, Base
 # }
 # asyncio.run(Tgday.service(**test_input))
 
-GetTgday.loadToCsv()
+# GetTgday.loadToCsv()

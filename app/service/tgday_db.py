@@ -80,17 +80,23 @@ class GetTgday:
         else:
             return f"</br> <h4> 등록하신 TG day가 존재하지 않아요! 'tgday' 서비스를 통해 등록해주세요!<h4>"
 
-    # def loadToCsv():
-    #     outfile = open("./mydump.csv", "wb")
-    #     outcsv = csv.writer(outfile)
-    #     session = Session()
-    #     pd.read_sql(session.query(model_tg).statement, session.bind)
-    #     print()
-    #     # print(values)
-    #     # [
-    #     #     outcsv.writerow([getattr(curr, column.name) for column in model_tg.__mapper__.columns])
-    #     #     for curr in records
-    #     # ]
-    #     # or maybe use outcsv.writerows(records)
+    def loadToCsv():
+        outfile = open("./mydump.csv", "w", encoding="utf-8-sig")
+        outcsv = csv.writer(outfile)
+        outcsv.writerow(["이름", "날짜"])
 
-    #     outfile.close()
+        records = Session().query(model_tg).all()
+        for record in records:
+            list_value = []
+            for column in model_tg.__mapper__.columns:
+                if column.name == "user_id_webex":
+                    continue
+                else:
+                    value = getattr(record, column.name)
+                    if type(value) != str:
+                        value = value.strftime("%y-%m-%d")
+                    list_value.append(value)
+
+            outcsv.writerow(list_value)
+
+        outfile.close()

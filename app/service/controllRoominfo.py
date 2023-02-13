@@ -12,7 +12,8 @@ CONN = RedisClient(1)
 class ControllRoominfo:
     def registRoominfo(result):
         key, value = ParsingData.prseWebhook(result)
-        CONN.setContent(key, value, timedelta(minutes=3))
+        # CONN.setContent(key, value, timedelta(minutes=20))
+        CONN.setContent(key, value)
         return "Success"
 
     def addServiceRoominfo(key, serviceInfo: dict):

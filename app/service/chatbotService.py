@@ -4,7 +4,9 @@ sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.service.elasticsearch import Match, Document
 from app.service.parsing import ParsingData
 from app.service.redis import RedisClient
-from app.service.tgday import Tgday, GetTgday
+from app.service.tgday_db import Tgday, GetTgday
+
+# from app.service.tgday import Tgday, GetTgday
 from app.service.controllRoominfo import ControllRoominfo
 
 CONN = RedisClient(1)

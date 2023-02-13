@@ -19,7 +19,7 @@ depends_on = None
 def upgrade():
     op.create_table(
         "users",
-        sa.Column("id", sa.String(length=120), nullable=False),
+        sa.Column("id", sa.String(length=120), autoincrement=True, nullable=False),
         sa.Column("user_name", sa.String(length=80), nullable=False),
         sa.Column("user_email", sa.String(length=300), nullable=False),
         sa.Column("user_id_webex", sa.String(length=1000)),

@@ -24,15 +24,15 @@ def createScheduler() -> Rocketry:
 app = Rocketry(execution="async")
 
 
-@app.task("every 1 minute")
-async def do_things():
-    return Smtp.getConnection()
-
-
 @app.setup()
 def setup_app(task_logger=TaskLogger()):
     repo = CSVFileRepo(filename="logs.csv", model=MinimalRecord)
     task_logger.set_repo(repo)
+
+
+@app.task("every 1 minute")
+async def do_things():
+    return Smtp.getConnection()
 
 
 # if __name__ == "__main__":

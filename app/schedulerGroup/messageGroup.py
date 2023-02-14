@@ -5,7 +5,7 @@ from app.connection.smtp import Smtp
 group: Grouper = Grouper()
 
 
-@group.task(cron("1 * * * *"))
+@group.task("every 1 minute")
 def send_mail():
     Smtp.getConnection()
 

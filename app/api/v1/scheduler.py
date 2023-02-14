@@ -1,9 +1,9 @@
-from app.core.server import scheduler
+from app.core.scheduler_server import scheduler_app
 from fastapi import APIRouter
 
 
 router: APIRouter = APIRouter()
-session = scheduler.session
+session = scheduler_app.session
 
 
 @router.post("/shcheduler/shut_down")

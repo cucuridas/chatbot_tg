@@ -3,6 +3,7 @@ from typing import Optional
 
 
 class UserBase(BaseModel):
+    # id: int
     user_name: str
     user_email: str
     user_id_webex: Optional[str] = None
@@ -10,7 +11,7 @@ class UserBase(BaseModel):
 
 
 class ResponseUsers(UserBase):
-    id: str
+    id: int
 
     class Config:
         orm_mode = True

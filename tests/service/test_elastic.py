@@ -5,7 +5,7 @@ sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg/chatbot_tg")
 
 
-from app.service.elasticsearch import Match, Document
+from app.util.elasticsearch import Match, Document
 
 
 if __name__ == "__main__":

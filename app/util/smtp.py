@@ -10,3 +10,6 @@ class smtpService:
         db.commit()
 
         return req.dict()
+
+    def getStmpInfo(db: Session):
+        return db.query(SmtpInfoModel).first()

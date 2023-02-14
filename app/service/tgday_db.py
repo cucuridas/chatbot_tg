@@ -4,8 +4,8 @@ import csv
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.core.db.base import Session
-from app.service.controllRoominfo import ControllRoominfo
-from app.service.redis import RedisClient
+from app.util.controllRoominfo import ControllRoominfo
+from app.util.redis import RedisClient
 from app.core.db.models.tgday import Tgday as model_tg
 from app.core.db.base import *
 from datetime import date

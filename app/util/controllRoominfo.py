@@ -3,8 +3,8 @@ import sys
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from datetime import timedelta
 import json
-from app.service.parsing import ParsingData
-from app.service.redis import RedisClient
+from app.util.parsing import ParsingData
+from app.util.redis import RedisClient
 
 CONN = RedisClient(1)
 

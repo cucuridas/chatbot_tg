@@ -5,9 +5,9 @@ from fastapi import APIRouter, Request, Body, Depends, Path
 from app.service.tgday import Tgday, GetTgday
 from app.core.config import Settings
 import logging, json
-from app.service.webex import Messages
-from app.service.controllRoominfo import ControllRoominfo
-from app.service.elasticsearch import Match
+from app.util.webex import Messages
+from app.util.controllRoominfo import ControllRoominfo
+from app.util.elasticsearch import Match
 from app.service.chatbotService import ChatbotService, SERVICE_VALUE
 
 

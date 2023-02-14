@@ -1,7 +1,7 @@
 import sys
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
-from app.service.redis import RedisClient
+from app.util.redis import RedisClient
 
 
 if __name__ == "__main__":

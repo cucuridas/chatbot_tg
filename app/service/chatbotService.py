@@ -2,14 +2,14 @@ import sys
 from app.core.db.base import Session
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
-from app.service.elasticsearch import Match, Document
-from app.service.parsing import ParsingData
-from app.service.redis import RedisClient
+from app.util.elasticsearch import Match, Document
+from app.util.parsing import ParsingData
+from app.util.redis import RedisClient
 from app.service.tgday_db import Tgday, GetTgday
 from app.core.db.models.users import Users
 
 # from app.service.tgday import Tgday, GetTgday
-from app.service.controllRoominfo import ControllRoominfo
+from app.util.controllRoominfo import ControllRoominfo
 
 CONN = RedisClient(1)
 SERVICE_VALUE = {None: None, "TGday": Tgday, "getTgday": GetTgday}

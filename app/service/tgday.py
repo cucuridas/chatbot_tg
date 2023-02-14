@@ -1,12 +1,12 @@
 import sys
-from app.service.controllRoominfo import ControllRoominfo
+from app.util.controllRoominfo import ControllRoominfo
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
-from app.service.elasticsearch import Match, Document
-from app.service.redis import RedisClient
+from app.util.elasticsearch import Match, Document
+from app.util.redis import RedisClient
 from app.core.userinfo import User
 from datetime import datetime
-from app.service.parsing import ParsingData
+from app.util.parsing import ParsingData
 import re
 
 CONN = RedisClient(1)

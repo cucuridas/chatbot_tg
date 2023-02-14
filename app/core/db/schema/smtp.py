@@ -7,3 +7,10 @@ class ReqSmtpInfoSchema(BaseModel):
     smtp_url: str
     smtp_port: int
     receive_mail: str
+
+
+class ResSmtpInfoSchema(ReqSmtpInfoSchema):
+    id: int
+
+    class Config:
+        orm_mode = True

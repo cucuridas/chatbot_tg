@@ -1,7 +1,7 @@
 import sys
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
-from app.service.parsing import ParsingData
+from app.util.parsing import ParsingData
 from app.connection.redis import RedisConnection
 import json
 from typing import Any

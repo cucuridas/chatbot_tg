@@ -29,3 +29,11 @@ class Settings:
     DB_HOST: str = os.getenv("DB_HOST")
     DB_PORT: str = os.getenv("DB_PORT")
     DB_NAME: str = os.getenv("DB_NAME")
+
+
+class DefaultSnmpSettings:
+    SEND_MAIL: str = os.getenv("SEND_MAIL")
+    SEND_PASSWORD: str = os.getenv("SEND_PASSWORD")
+    SMTP_URL: str = os.getenv("SMTP_URL")
+    SMTP_PORT: int = os.getenv("SMTP_PORT")
+    RECEIVE_MAIL: str = os.getenv("RECEIVE_MAIL")

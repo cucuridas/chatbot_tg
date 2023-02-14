@@ -9,4 +9,4 @@ from app.connection.smtp import Smtp
 
 
 if __name__ == "__main__":
-    Smtp.sendMail()
+    Smtp.getConnection()

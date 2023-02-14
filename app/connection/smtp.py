@@ -1,3 +1,4 @@
+from email.message import EmailMessage
 import smtplib
 from email.utils import formataddr
 from email.mime.text import MIMEText
@@ -18,7 +19,7 @@ class Smtp:
         smtp_hiworks.login(EMAIL_ADDR, EMAIL_PASSWORD)
 
         # 3. MIME 형태의 이메일 메세지 작성
-        message = MIMEMultipart("alternative")
+        message = EmailMessage()
         message.set_content(
             """
 안녕하십니까, 플랫폼 개발 3팀 최충은 프로입니다.

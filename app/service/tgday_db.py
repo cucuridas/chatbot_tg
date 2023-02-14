@@ -80,8 +80,10 @@ class GetTgday:
         else:
             return f"</br> <h4> 등록하신 TG day가 존재하지 않아요! 'tgday' 서비스를 통해 등록해주세요!<h4>"
 
+
+class MergeTgday:
     def loadToCsv():
-        outfile = open("./mydump.csv", "w", encoding="utf-8-sig")
+        outfile = open("./merge_tgday.csv", "w", encoding="utf-8-sig")
         outcsv = csv.writer(outfile)
         outcsv.writerow(["이름", "날짜"])
 
@@ -100,3 +102,9 @@ class GetTgday:
             outcsv.writerow(list_value)
 
         outfile.close()
+
+    def registInfo():
+        pass
+
+    def send():
+        pass

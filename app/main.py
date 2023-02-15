@@ -2,6 +2,7 @@ import asyncio
 import sys
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
+sys.path.append("/home/cucuridas/chatbot_tg")
 import uvicorn
 from app.util.webex import WebexHook
 from app.core.scheduler_server import scheduler_app

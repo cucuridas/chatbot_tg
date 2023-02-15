@@ -2,7 +2,7 @@ FROM python:3.11.1-slim
 
 ENV PYTHONUNBUFFERED 1
 EXPOSE 8000
-WORKDIR /app
+WORKDIR /home/cucuridas/chatbot_tg
 
 RUN apt-get update && apt-get install vim curl build-essential -y && \
     apt-get install -y --no-install-recommends netcat && \

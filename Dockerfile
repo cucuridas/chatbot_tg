@@ -1,8 +1,12 @@
 FROM python:3.11.1-slim
 
 ENV PYTHONUNBUFFERED 1
+ENV TZ=Asia/Seoul
+
 EXPOSE 8000
 WORKDIR /home/cucuridas/chatbot_tg
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update && apt-get install vim curl build-essential -y && \
     apt-get install -y --no-install-recommends netcat && \

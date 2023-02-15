@@ -22,7 +22,9 @@ class Server(uvicorn.Server):
 
 async def main():
     "Run scheduler and the API"
-    server = Server(config=uvicorn.Config(app, workers=1, loop="asyncio"))
+    server = Server(
+        config=uvicorn.Config(app, workers=1, loop="asyncio", host="0.0.0.0", port=8000)
+    )
 
     api = asyncio.create_task(server.serve())
     sched = asyncio.create_task(scheduler_app.serve())

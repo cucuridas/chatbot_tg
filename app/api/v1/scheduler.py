@@ -2,7 +2,7 @@ from app.core.scheduler_server import scheduler_app
 from fastapi import APIRouter
 
 
-router: APIRouter = APIRouter()
+router: APIRouter = APIRouter(tags=["Scheduler"])
 session = scheduler_app.session
 
 
@@ -12,10 +12,17 @@ async def shut_down_session():
     session.shut_down()
 
 
-@router.post("/shcheduler/{task_name}/run", name="task 이름을 입력받아 실행 시키는 API")
+@router.post("/shcheduler/{task_name}/run", name="task 이름을 입력받아 예약 시키는 API")
 async def runScheduler(task_name: str):
     task = session[task_name]
     task.force_run = True
+    return "Success"
+
+
+@router.post("/shcheduler/{task_name}/stop", name="task 이름을 입력받아 예약해제 시키는 API")
+async def stopScheduler(task_name: str):
+    task = session[task_name]
+    task.force_run = False
     return "Success"
 
 

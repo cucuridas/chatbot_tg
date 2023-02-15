@@ -4,7 +4,7 @@ from typing import List
 from app.util.smtp import smtpService
 from app.core.db.base import *
 
-router: APIRouter = APIRouter()
+router: APIRouter = APIRouter(tags=["Smtp"])
 
 
 @router.post("/smtpregist", name="smtp 정보 변경", response_model=ReqSmtpInfoSchema)

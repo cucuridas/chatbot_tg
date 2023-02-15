@@ -19,9 +19,13 @@ depends_on = None
 def upgrade():
     op.create_table(
         "tgday",
+        sa.Column("id", sa.BigInteger(), primary_key=True),
         sa.Column("user_name", sa.String(length=80), nullable=False),
         sa.Column("tgday_regist_day", sa.Date(), nullable=False),
         sa.Column("user_id_webex", sa.String(length=300), nullable=False),
+    )
+    op.create_foreign_key(
+        "update_foreign_keyy", "tgday", "users", ["user_name"], ["user_name"], ondelete="CASCADE"
     )
     pass
 

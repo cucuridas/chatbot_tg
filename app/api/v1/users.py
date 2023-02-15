@@ -5,7 +5,7 @@ from typing import List
 from app.service.user import UserService
 from app.core.db.base import *
 
-router: APIRouter = APIRouter()
+router: APIRouter = APIRouter(tags=["Users"])
 
 
 @router.post("/users", name="user 정보 추가", response_model=ResponseUsers)

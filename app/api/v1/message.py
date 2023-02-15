@@ -11,7 +11,7 @@ from app.util.elasticsearch import Match
 from app.service.chatbotService import ChatbotService, SERVICE_VALUE
 
 
-router: APIRouter = APIRouter()
+router: APIRouter = APIRouter(tags=["Webex_Message"])
 messageObj = Messages()
 
 

@@ -2,14 +2,17 @@ import re
 import sys
 import csv
 
+from sqlalchemy import and_
+
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.core.db.base import Session
 from app.util.controllRoominfo import ControllRoominfo
 from app.util.redis import RedisClient
-from app.core.db.models.tgday import Tgday as model_tg
 from app.core.db.base import *
 from datetime import date
 from app.core.db.models.users import Users
+from app.core.db.models.tgday import Tgday as model_tg
+from app.core.db.models.team import TeamModel
 from app.core.db.base import Session
 
 
@@ -82,26 +85,24 @@ class GetTgday:
 
 
 class MergeTgday:
-    def loadToCsv():
-        outfile = open("./merge_tgday.csv", "w", encoding="utf-8-sig")
+    def loadToCsv(team_name):
+        outfile = open(f"./{team_name}_tgday.csv", "w", encoding="utf-8-sig")
         outcsv = csv.writer(outfile)
-        outcsv.writerow(["이름", "날짜"])
+        outcsv.writerow(["이름", "팀명", "날짜"])
 
-        records = Session().query(model_tg).all()
+        records = MergeTgday.getTgdayfilterTeam(team_name)
         for record in records:
-            list_value = []
-            for column in model_tg.__mapper__.columns:
-                if column.name == "user_id_webex":
-                    continue
-                else:
-                    value = getattr(record, column.name)
-                    if type(value) != str:
-                        value = value.strftime("%y-%m-%d")
-                    list_value.append(value)
-
-            outcsv.writerow(list_value)
+            outcsv.writerow(list(record))
 
         outfile.close()
+
+    def getTgdayfilterTeam(team_name, db: Session = Session()):
+        values = (
+            db.query(Users.user_name, Users.user_team, model_tg.tgday_regist_day)
+            .filter(and_(team_name == Users.user_team, Users.user_name == model_tg.user_name))
+            .all()
+        )
+        return values
 
     def registInfo():
         pass

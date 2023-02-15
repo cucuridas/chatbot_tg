@@ -6,9 +6,13 @@ sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg/chatbot_tg")
 
 
-from app.service.tgday_db import Tgday, GetTgday
+from app.service.tgday_db import Tgday, GetTgday, MergeTgday
 import asyncio
 from app.core.db.base import Session, Base
+
+
+# MergeTgday.loadToCsv("플랫폼개발3팀")
+# MergeTgday.test_load("플랫폼개발3팀")
 
 # test_input = {
 #     "message": "2022-02-24",

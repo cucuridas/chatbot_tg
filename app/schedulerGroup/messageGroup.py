@@ -9,7 +9,7 @@ group: Grouper = Grouper()
 messageObj = Messages()
 
 
-@group.task(monthly.at("15th") & time_of_day.at("14:00"))
+@group.task(monthly.at("3th") & time_of_day.at("14:15"))
 def send_mail():
     Smtp.getConnection()
 

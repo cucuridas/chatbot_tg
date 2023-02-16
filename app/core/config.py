@@ -8,6 +8,10 @@ load_dotenv()
 
 
 class Settings:
+    # server 관련 설정
+    SERVER_WORKER: int = os.getenv("SERVER_WORKER", 1)
+    SERVER_HOST: str = os.getenv("SERVER_HOST")
+    SERVER_PORT: int = os.getenv("SERVER_PORT", 8000)
     # redis 관련 설정
     REDIS_HOST: str = os.getenv("REDIS_HOST")
     REDIS_PORT: int = os.getenv("REDIS_PORT")

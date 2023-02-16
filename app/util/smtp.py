@@ -1,4 +1,3 @@
-from app.connection.smtp import Smtp
 from app.core.db.base import *
 from app.core.db.schema.smtp import ReqSmtpInfoSchema
 from app.core.db.models.smtp import SmtpInfoModel

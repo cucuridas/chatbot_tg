@@ -1,17 +1,31 @@
+import datetime
+import os
 from rocketry import Grouper
 from rocketry.conds import cron, after_success, daily, time_of_week, time_of_day, monthly
-from app.connection.smtp import Smtp
 from app.core.db.base import *
 from app.core.db.models.users import Users
 from app.util.webex import Messages
+from app.service.tgday_db import MergeTgday
+from app.util.smtpMessage import SendMessage
 
 group: Grouper = Grouper()
 messageObj = Messages()
 
 
-@group.task(monthly.at("3th") & time_of_day.at("14:15"))
+@group.task(monthly.at("3rd") & time_of_day.at("14:00"))
 def send_mail():
-    Smtp.getConnection()
+    month = datetime.date.today().strftime("%m")
+    input_value = {
+        "title": f"{month}월 tgday 종합입니다",
+        "content": f"""
+                    안녕하십니까, 플랫폼 개발 3팀 최충은 프로입니다.
+                    {month}월 플랫폼 개발3팀 tgday 종합본 입니다
+                    감사합니다""",
+        "csvFilePath": "./플랫폼개발3팀_tgday.csv",
+    }
+    MergeTgday.loadToCsv("플랫폼개발3팀")
+    SendMessage().writeEmail(**input_value)
+    os.remove("플랫폼개발3팀_tgday.csv")
 
 
 @group.task(daily & (time_of_week.at("Fri") & time_of_day.at("09:00")))

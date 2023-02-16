@@ -7,6 +7,7 @@ import uvicorn
 from app.util.webex import WebexHook
 from app.core.scheduler_server import scheduler_app
 from app.core.server import app
+from app.core.config import Settings
 
 
 class Server(uvicorn.Server):
@@ -23,7 +24,13 @@ class Server(uvicorn.Server):
 async def main():
     "Run scheduler and the API"
     server = Server(
-        config=uvicorn.Config(app, workers=1, loop="asyncio", host="0.0.0.0", port=8000)
+        config=uvicorn.Config(
+            app,
+            workers=int(Settings.SERVER_WORKER),
+            loop="asyncio",
+            host=Settings.SERVER_HOST,
+            port=int(Settings.SERVER_PORT),
+        )
     )
 
     api = asyncio.create_task(server.serve())

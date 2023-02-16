@@ -12,7 +12,7 @@ def createScheduler() -> Rocketry:
 
     @roketryScheduler.setup()
     def setup_app(task_logger=TaskLogger()):
-        repo = CSVFileRepo(filename="logs.csv", model=MinimalRecord)
+        repo = CSVFileRepo(filename="./schedule_log/logs.csv", model=MinimalRecord)
         task_logger.set_repo(repo)
 
     return roketryScheduler

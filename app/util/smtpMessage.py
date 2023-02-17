@@ -1,8 +1,5 @@
-from email.message import EmailMessage
 from email.mime.application import MIMEApplication
 from app.connection.smtp import SmtpConnetion, smtp_info
-from app.service.tgday_db import MergeTgday
-from email.utils import formataddr
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
@@ -34,7 +31,3 @@ class SendMessage(SmtpConnetion):
         self.smtp_hiworks.send_message(message)
         # 5. 메일을 보내면 서버와의 연결 끊기
         self.smtp_hiworks.quit()
-
-
-# os.remove("플랫폼개발3팀_tgday.csv")
-# MergeTgday.loadToCsv("플랫폼개발3팀")

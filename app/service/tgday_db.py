@@ -1,8 +1,12 @@
+import datetime
+import os
 import re
 import sys
 import csv
 
 from sqlalchemy import and_
+
+from app.util.smtpMessage import SendMessage
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.core.db.base import Session
@@ -104,8 +108,18 @@ class MergeTgday:
         )
         return values
 
-    def registInfo():
-        pass
 
-    def send():
-        pass
+class SendMergedTgday:
+    def sendMail(teamName):
+        month = datetime.date.today().strftime("%m")
+        input_value = {
+            "title": f"{month}월 tgday 종합입니다",
+            "content": f"""
+                        안녕하십니까, {teamName} 담당자입니다.
+                        {month}월 {teamName} tgday 종합본 입니다
+                        감사합니다""",
+            "csvFilePath": f"./{teamName}_tgday.csv",
+        }
+        MergeTgday.loadToCsv(teamName)
+        SendMessage().writeEmail(**input_value)
+        os.remove(f"{teamName}_tgday.csv")

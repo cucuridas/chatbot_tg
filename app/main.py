@@ -33,8 +33,9 @@ async def main():
         )
     )
 
-    api = asyncio.create_task(server.serve())
-    sched = asyncio.create_task(scheduler_app.serve())
+    async with asyncio.TaskGroup() as group:
+        api = group.create_task(server.serve())
+        sched = group.create_task(scheduler_app.serve())
 
     await asyncio.wait([sched, api])
 

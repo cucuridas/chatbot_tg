@@ -1,14 +1,16 @@
 # TG chatbot
 
 업무자동화 및 알림 서비스를 제공해주기위한 내부 시스템으로서 개발에 대한 명세를 정의합니다
-개발을 위한 환경 구축 및 관련 정보는 [devREADME.md](./devREADME.md) 를 참고하시길 바랍니다
+
 ---
 
 ## 1. chatbot(app)구조
 
 1. webex chatbot 응답구조
 
-![Untitled](https://user-images.githubusercontent.com/65060314/219532348-e6960b40-39da-447e-a185-bfdb6951b0cc.png)
+![[https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c](https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c) 이미지 참조](https://user-images.githubusercontent.com/65060314/219532348-e6960b40-39da-447e-a185-bfdb6951b0cc.png)
+
+[https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c](https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c) 이미지 참조
 
 ```
 chatbot email 주소와 webex client를 통해 메세지 이벤트 발생
@@ -56,7 +58,7 @@ webhook을 통해 전달 받은 이벤트를 인메모리 환경에 저장해두
 
 webhook 이벤트를 통해 전달 받은 아래의 데이터를 저장합니다
 
-```json
+```
 "id": "{Webhook event id}",
 "roomId": "{Client room id}",
 "roomType": "{Client가 요청한 Room type}",

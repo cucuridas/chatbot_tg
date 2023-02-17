@@ -6,6 +6,7 @@ from app.util.elasticsearch import Match, Document
 from app.util.parsing import ParsingData
 from app.util.redis import RedisClient
 from app.service.tgday_db import Tgday, GetTgday
+from app.service.workReport import WorkReport
 from app.core.db.models.users import Users
 from app.core.db.base import *
 from app.core.db.models.users import Users
@@ -14,30 +15,26 @@ from app.core.db.models.users import Users
 from app.util.controllRoominfo import ControllRoominfo
 
 CONN = RedisClient(1)
-SERVICE_VALUE = {None: None, "TGday": Tgday, "getTgday": GetTgday}
+SERVICE_VALUE = {None: None, "TGday": Tgday, "getTgday": GetTgday, "WorkReport": WorkReport}
 
 
 class ChatbotService:
     async def checkService(roomId, message, conn=None):
         value = await Match().match(message)
         if value is None:
-            return conn.postMessage(
-                roomId, "</br> <h4>확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~<h4>"
-            )
+            return conn.postMessage(roomId, "</br> <h4>확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~<h4>")
         else:
             result = value["service"]
             redis_value = ControllRoominfo.addServiceRoominfo(roomId, value)
 
             db = Session()
-            db.query(Users).filter(
-                Users.user_email == redis_value["personEmail"]
-            ).update({"user_room_info": roomId})
+            db.query(Users).filter(Users.user_email == redis_value["personEmail"]).update(
+                {"user_room_info": roomId}
+            )
             db.commit()
 
             redis_value.update({"roomId": roomId})
-            return_service = await ChatbotService.returnMessage(
-                SERVICE_VALUE[result], redis_value
-            )
+            return_service = await ChatbotService.returnMessage(SERVICE_VALUE[result], redis_value)
 
             return conn.postMessage(
                 roomId,
@@ -78,9 +75,7 @@ class ChatbotService:
         return "Success"
 
     def checkUser(value, db: Session = Session()):
-        value = (
-            db.query(Users).filter(Users.user_email.like(value["personEmail"])).first()
-        )
+        value = db.query(Users).filter(Users.user_email.like(value["personEmail"])).first()
         if value == None:
             return False
         else:

@@ -7,3 +7,7 @@ Get tgday => getTgday
 GetTgday => getTgday
 tgday Get => getTgday
 tgday 조회 => getTgday
+업무보고 => WorkReport
+주간업무 => WorkReport
+주간 업무 보고 => WorkReport
+주간 보고 => WorkReport

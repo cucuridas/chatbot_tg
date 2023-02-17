@@ -70,6 +70,14 @@ class Messages:
 
         return json.loads(response.text)
 
+    def downloadFile(self, fileUrl):
+        """
+        https://webexapis.com/v1/contents/Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL0NPTlRFTlQvMTkwZmU2NDAtYWU4MS0xMWVkLWJjMzItMmRmYTZmYTU4NTNiLzA
+        """
+        response = requests.get(url=fileUrl, headers=self.header)
+        response.raise_for_status()
+        return response
+
     def postMessage(self, roomId, value):
         data = {"roomId": roomId, "markdown": value}
         # header = self.header

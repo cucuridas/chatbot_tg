@@ -8,10 +8,7 @@
 
 1. webex chatbot 응답구조
 
-![[https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c](https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c) 이미지 참조](https://user-images.githubusercontent.com/65060314/219532348-e6960b40-39da-447e-a185-bfdb6951b0cc.png)
-
-[https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c](https://johnsgeorge.medium.com/webexample-of-a-bot-how-to-get-your-cisco-webex-teams-bot-up-and-running-dd7b4b8da12c) 이미지 참조
-
+![image](https://user-images.githubusercontent.com/65060314/219557787-b39587cc-43a8-4a2e-beff-d27e6bdd4d36.png)
 ```
 chatbot email 주소와 webex client를 통해 메세지 이벤트 발생
 -> webhook을 통해 'webexcloud'에서 이벤트를 '백엔드서버(tg chatbot)'이 전달 받음

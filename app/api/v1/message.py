@@ -25,9 +25,9 @@ async def result(request: Request):
         room_info = ChatbotService.checkRedisService(result["data"]["roomId"])
         service = SERVICE_VALUE[room_info]
         # 해당 구문에서 캐시에 저장되어진 서비스 정보 유무와,서비스 별 입력 값  validation 필요
-        if ChatbotService.checkValidation(service, message["text"]):
+        if ChatbotService.checkValidation(service, message):
             await ChatbotService.provideService(
-                service, message["text"], message["roomId"], messageObj
+                service, message, message["roomId"], messageObj
             )
         else:
             if message["text"] == "no":

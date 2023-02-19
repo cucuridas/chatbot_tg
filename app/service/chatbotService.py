@@ -15,26 +15,39 @@ from app.core.db.models.users import Users
 from app.util.controllRoominfo import ControllRoominfo
 
 CONN = RedisClient(1)
-SERVICE_VALUE = {None: None, "TGday": Tgday, "getTgday": GetTgday, "WorkReport": WorkReport}
+SERVICE_VALUE = {
+    None: None,
+    "TGday": Tgday,
+    "getTgday": GetTgday,
+    "WorkReport": WorkReport,
+}
 
 
 class ChatbotService:
     async def checkService(roomId, message, conn=None):
         value = await Match().match(message)
         if value is None:
-            return conn.postMessage(roomId, "</br> <h4>확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~<h4>")
+            return conn.postMessage(
+                roomId, "</br> <h4>확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~<h4>"
+            )
         else:
             result = value["service"]
             redis_value = ControllRoominfo.addServiceRoominfo(roomId, value)
 
             db = Session()
-            db.query(Users).filter(Users.user_email == redis_value["personEmail"]).update(
-                {"user_room_info": roomId}
+            user_info = db.query(Users).filter(
+                Users.user_email == redis_value["personEmail"]
+            )
+            user_info.update({"user_room_info": roomId})
+            ControllRoominfo.addServiceRoominfo(
+                roomId, {"user_name": user_info.first().user_name}
             )
             db.commit()
 
             redis_value.update({"roomId": roomId})
-            return_service = await ChatbotService.returnMessage(SERVICE_VALUE[result], redis_value)
+            return_service = await ChatbotService.returnMessage(
+                SERVICE_VALUE[result], redis_value
+            )
 
             return conn.postMessage(
                 roomId,
@@ -66,7 +79,7 @@ class ChatbotService:
     def notCorrectValue(roomId, conn, service):
         return conn.postMessage(
             roomId,
-            f"'{service}'</br> <h4> 서비스에 맞지 않는 값이 입력되었어요!\n 다시 입력해주세요~\n 원하시는 서비스가 아닐 경우 'no'를 입력해주세요 <h4>",
+            f"'{service}'</br> <h4> 서비스에 맞지 않는 값이 입력되었거나 필요한 파일이 누락되었어요!\n 다시 입력해주세요~\n 원하시는 서비스가 아닐 경우 'no'를 입력해주세요 <h4>",
         )
 
     async def provideService(service, message, roomId, conn):
@@ -75,7 +88,9 @@ class ChatbotService:
         return "Success"
 
     def checkUser(value, db: Session = Session()):
-        value = db.query(Users).filter(Users.user_email.like(value["personEmail"])).first()
+        value = (
+            db.query(Users).filter(Users.user_email.like(value["personEmail"])).first()
+        )
         if value == None:
             return False
         else:

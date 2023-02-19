@@ -27,11 +27,15 @@ SERVICE_NAME = "tgday"
 class Tgday:
     async def service(message, roomId, conn, db: Session = Session()):
         redis_value = CONN.getContent(roomId)
-        year, month, day = message.split("-")
+        year, month, day = message["text"].split("-")
         registDate = date(year=int(year), month=int(month), day=int(day))
         webexId = redis_value["personId"]
 
-        value = db.query(Users).filter(Users.user_email.like(redis_value["personEmail"])).first()
+        value = (
+            db.query(Users)
+            .filter(Users.user_email.like(redis_value["personEmail"]))
+            .first()
+        )
 
         if Tgday.checkTgday(db, value.user_name):
             Tgday.updateTgday(value.user_name, registDate, conn, roomId, db)
@@ -70,7 +74,7 @@ class Tgday:
 
     def checkValue(message):
         regex_value = re.compile(r"\d{4}\-\d{2}\-\d{2}")
-        return bool(re.search(regex_value, message))
+        return bool(re.search(regex_value, message["text"]))
 
     async def returnMessage(value):
         return "</br> <h4> 날짜를 입력해주세요 [ex]2022-02-07\n "
@@ -79,7 +83,11 @@ class Tgday:
 class GetTgday:
     async def returnMessage(value, db: Session = Session()):
         ControllRoominfo.deleteRoominfo(value["roomId"])
-        value = db.query(model_tg).filter(model_tg.user_id_webex == value["personId"]).first()
+        value = (
+            db.query(model_tg)
+            .filter(model_tg.user_id_webex == value["personId"])
+            .first()
+        )
         if value != None:
             day_info = value.tgday_regist_day
             date_value = day_info.strftime("%y년 %m월 %d일")
@@ -103,7 +111,11 @@ class MergeTgday:
     def getTgdayfilterTeam(team_name, db: Session = Session()):
         values = (
             db.query(Users.user_name, Users.user_team, model_tg.tgday_regist_day)
-            .filter(and_(team_name == Users.user_team, Users.user_name == model_tg.user_name))
+            .filter(
+                and_(
+                    team_name == Users.user_team, Users.user_name == model_tg.user_name
+                )
+            )
             .all()
         )
         return values

@@ -210,3 +210,4 @@ data/
 logs.csv
 scheduler_log/
 *.csv
+workReport

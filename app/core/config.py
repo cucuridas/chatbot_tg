@@ -41,3 +41,7 @@ class DefaultSnmpSettings:
     SMTP_URL: str = os.getenv("SMTP_URL")
     SMTP_PORT: int = os.getenv("SMTP_PORT")
     RECEIVE_MAIL: str = os.getenv("RECEIVE_MAIL")
+
+
+class WorkReportSettings:
+    WORK_REPORT_SAVE_POINT: str = os.getenv("WORK_REPORT_SAVE_POINT")

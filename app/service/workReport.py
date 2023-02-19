@@ -16,7 +16,7 @@ class WorkReport:
         value = Session
         return conn.postMessage(
             roomId,
-            "</br> <h4> 업무보고 파일을 정상적으로 서버에 저장하였어요! \n 수정하시고 싶으시다면 '업무보고 파일 변경' 서비스를 통해 다시 파일을 전송해주세요! \n 종합 마감은 금요일 10시입니다!",
+            "</br> <h4> 업무보고 파일을 정상적으로 서버에 저장하였어요! \n 수정하시고 싶으시다면 '업무보고' 서비스를 통해 다시 파일을 전송해주세요! \n 종합 마감은 금요일 10시입니다!",
         )
 
     async def returnMessage(value):

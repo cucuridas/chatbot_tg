@@ -99,11 +99,11 @@ class Messages:
     def saveFiletoPptx(content, userName):
         # 날짜 정보 수집
         today = CreateDatetime.today()
-        fileName = "{}/{}_{}_{}_{}.pptx".format(
+        fileName = "{}/{}_{}_{}주차_{}.pptx".format(
             WorkReportSettings.WORK_REPORT_SAVE_POINT,
             today["year"],
             today["month"],
-            today["day"],
+            CreateDatetime.todayToWeek(today["year"], today["month"], today["day"]),
             userName,
         )
         # 서버 workReport 디렉토리에 저장

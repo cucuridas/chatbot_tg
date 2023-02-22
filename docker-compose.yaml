@@ -12,3 +12,4 @@ services:
       TZ: Asia/Seoul
     volumes:
       - ./schedule_log:/home/cucuridas/chatbot_tg/schedule_log
+      - $WORK_REPORT_SAVE_POINT:/home/cucuridas/chatbot_tg/workReport

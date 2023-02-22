@@ -32,9 +32,7 @@ class WebexHook:
             "event": "created",
         }
 
-        response = requests.post(
-            url=self.url, headers=self.header, data=json.dumps(self.data)
-        )
+        response = requests.post(url=self.url, headers=self.header, data=json.dumps(self.data))
         response.raise_for_status()
         logging.info("Success,add webhook")
 
@@ -78,9 +76,7 @@ class Messages:
         data = {"roomId": roomId, "markdown": value}
         # header = self.header
         # header.setdefault("Accept", "application/json")
-        response = requests.post(
-            url=self.url, data=json.dumps(data), headers=self.header
-        )
+        response = requests.post(url=self.url, data=json.dumps(data), headers=self.header)
         response.raise_for_status()
         return "Success"
 
@@ -99,22 +95,32 @@ class Messages:
     def saveFiletoPptx(content, userName):
         # 날짜 정보 수집
         today = CreateDatetime.today()
-        fileName = "{}/{}_{}_{}주차_{}.pptx".format(
+        weekTody = CreateDatetime.todayToWeek(today["year"], today["month"], today["day"])
+        fileName = "{}/{}주차/{}_{}_{}주차_{}.pptx".format(
             WorkReportSettings.WORK_REPORT_SAVE_POINT,
+            weekTody,
             today["year"],
             today["month"],
-            CreateDatetime.todayToWeek(today["year"], today["month"], today["day"]),
+            weekTody,
             userName,
         )
         # 서버 workReport 디렉토리에 저장
-        Messages.checkDirectory()
+        Messages.checkDirectory(weekTody)
         # os.mkfifo(fileName)
         with open(fileName, "wb") as f:
             f.write(content)
 
         return "Success"
 
-    def checkDirectory(dirPath: str = WorkReportSettings.WORK_REPORT_SAVE_POINT):
+    def checkDirectory(weekTody, dirPath: str = WorkReportSettings.WORK_REPORT_SAVE_POINT):
+        Messages.checkRootDirectory()
+        pathValue = f"{dirPath}/{weekTody}주차"
+        if os.path.exists(pathValue):
+            return True
+        else:
+            os.mkdir(pathValue)
+
+    def checkRootDirectory(dirPath: str = WorkReportSettings.WORK_REPORT_SAVE_POINT):
         if os.path.exists(dirPath):
             return True
         else:

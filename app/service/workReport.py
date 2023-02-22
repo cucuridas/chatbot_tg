@@ -1,10 +1,16 @@
+import copy
+import os
 from app.core.db.base import Session
 from app.util.redis import RedisClient
 from app.util.webex import Messages
 from app.core.db.models.users import Users
+from pptx import Presentation
+from pptx.shapes.graphfrm import GraphicFrame
+from pptx.shapes.autoshape import Shape
 
 CONN = RedisClient(1)
 SERVICE_NAME = "WorkReport"
+DEFALUT_FROM = "./form.pptx"
 
 
 class WorkReport:
@@ -27,3 +33,28 @@ class WorkReport:
             return False
         else:
             return True
+
+
+class MergeWorkReport:
+    def makeMergePPTX():
+        main_pptObj = Presentation(DEFALUT_FROM)
+        fileList = os.listdir("./workReport")
+
+        for fileName in fileList:
+            slide = MergeWorkReport.copySlide(f"./workReport/{fileName}")
+            # copy_slide = main_pptObj.slides.add_slide(main_pptObj.slide_layouts[6])
+            copy_slide = main_pptObj.slides[2]
+            # copy_slide = main_pptObj.slides.add_slide(slide)
+            for element in slide:
+                copy_slide.shapes._spTree.insert_element_before(element, "p:extLst")
+            main_pptObj.slides.add_slide(copy_slide)
+            main_pptObj.save(DEFALUT_FROM)
+
+    def copySlide(path):
+        pptObj = Presentation(path)
+        copyValue = pptObj.slides[2]
+        return_value = []
+        for shape in copyValue.shapes:
+            if type(shape) == Shape or type(shape) == GraphicFrame:
+                return_value.append(copy.deepcopy(shape.element))
+        return return_value

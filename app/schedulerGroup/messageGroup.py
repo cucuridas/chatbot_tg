@@ -27,7 +27,7 @@ def sendWorkReport(db=Session()):
         else:
             messageObj.postMessage(
                 result.user_room_info,
-                "</br> <h4> 주간 업무보고서 종합하는 날입니다!, 최충은프로에게 전달해주세요",
+                "</br> <h4> 주간 업무보고서 종합하는 날입니다!, '업무 보고'를 입력해서 저에게 파일을 전달해주세요!",
             )
 
 

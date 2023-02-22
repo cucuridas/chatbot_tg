@@ -2,7 +2,7 @@ import os
 import sys
 
 sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
-from app.service.tgday_db import MergeTgday
+from app.service.tgdayDb import MergeTgday
 import datetime
 
 from app.util.smtpMessage import SendMessage

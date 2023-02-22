@@ -17,7 +17,7 @@ chatbot email 주소와 webex client를 통해 메세지 이벤트 발생
 -> webex client로 결과 메세지 출력
 ```
 
-1. 프로젝트 서비스 실행 구조
+2. 프로젝트 서비스 실행 구조
 
 ```
 1. './infra' 디렉토리의 docker-compo 파일을 통해 위부 서비스 container 생성
@@ -27,7 +27,7 @@ chatbot email 주소와 webex client를 통해 메세지 이벤트 발생
 4. 'poetry run python3 ./app/main.py' 명령어를 통해 app 실행
 ```
 
-1. app 서비스 실행 내용
+3. app 서비스 실행 내용
 
 해당 내용은 main 파일이 실행되었을때의 실행 순서를 간략하게 나마 정리한 내용입니다 ‘corutine’ 형태로 실행되는 fastapi의 구조에 따라 해당내용가 다른 순서로 진행될 수 있음을 인지하시길 바랍니다
 
@@ -70,10 +70,10 @@ webhook 이벤트를 통해 전달 받은 아래의 데이터를 저장합니다
 
 해당 데이터는 프로젝트 루트 디렉토리에 ‘data’라는 이름의 디렉토리에 mount 되어 저장되어집니다
 
-1. team : 팀 정보가 담겨져 있는 Database
-2. user : 정보가 담겨져 있는 Database
-3. smtpinfo : 메일 전송 서비스를 위한 smtpinfo가 저장되어진 Database
-4. tgday : user 별 tgday 정보가 담겨져있는 Database
+1. team : 팀 정보가 담겨져 있는 table
+2. user : 정보가 담겨져 있는 table
+3. smtpinfo : 메일 전송 서비스를 위한 smtpinfo가 저장되어진 table
+4. tgday : user 별 tgday 정보가 담겨져있는 table
 
 ---
 

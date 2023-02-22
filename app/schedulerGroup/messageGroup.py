@@ -6,7 +6,7 @@ from app.core.db.base import *
 from app.core.db.models.users import Users
 from app.util.webex import Messages
 from app.service.workReport import MergeWorkReport
-from app.service.tgday_db import SendMergedTgday
+from app.service.tgdayDb import SendMergedTgday
 
 
 group: Grouper = Grouper()

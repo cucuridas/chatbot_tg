@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: chatbot:0.1
+    image: chatbot:latest
     restart: on-failure
     container_name: chatbot
     ports:

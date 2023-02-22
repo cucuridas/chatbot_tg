@@ -11,3 +11,5 @@ tgday 조회 => getTgday
 주간업무 => WorkReport
 주간 업무 보고 => WorkReport
 주간 보고 => WorkReport
+업무 보고 => WorkReport
+주간 업무 => WorkReport

@@ -5,6 +5,10 @@ from fastapi import APIRouter
 router: APIRouter = APIRouter(tags=["Scheduler"])
 session = scheduler_app.session
 
+"""
+roketry를 통해 schedule되는 task들을 관리하는 API입니다 fastapi를 통해 파라미터와 함수를 호출받아 설정됩니다
+"""
+
 
 @router.post("/shcheduler/shut_down")
 async def shut_down_session():

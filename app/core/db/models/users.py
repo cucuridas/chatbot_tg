@@ -4,6 +4,10 @@ from app.core.db.base import *
 
 
 class Users(Base):
+    """
+    users table의 데이터를 불러와 사용하기위한 model 입니다
+    """
+
     __tablename__ = "users"
 
     id = Column(BigInteger, primary_key=True)

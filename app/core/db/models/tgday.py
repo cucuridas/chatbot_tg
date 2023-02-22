@@ -4,6 +4,10 @@ from app.core.db.base import *
 
 
 class Tgday(Base):
+    """
+    tgday table의 데이터를 불러와 사용하기위한 model 입니다
+    """
+
     def __getitem__(self, key):
         return getattr(self, key)
 

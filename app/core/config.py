@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+"""
+.env 파일을 읽어와 환경변수를 클래스의 속성 값으로 사용할 수 있도록 합니다
+"""
+
 
 class Settings:
     # server 관련 설정

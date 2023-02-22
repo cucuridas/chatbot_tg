@@ -6,7 +6,19 @@ from rocketry.args import TaskLogger
 from rocketry.log import MinimalRecord
 
 
+"""
+scheduler 서버를 생성하는 파이썬 파일입니다
+"""
+
+
 def createScheduler() -> Rocketry:
+    """
+    roketry를 통해 scheduler 서버를 생성하는 함수입니다
+
+    Returns:
+        roketryScheduler: Rocketry
+
+    """
     roketryScheduler = Rocketry(execution="async")
     roketryScheduler.include_grouper(group)
 

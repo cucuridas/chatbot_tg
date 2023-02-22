@@ -9,23 +9,37 @@ from app.service.workReport import MergeWorkReport
 from app.service.tgdayDb import SendMergedTgday
 
 
+"""
+roketry를 통해 실행되는 task들에 대한 정의가 이루어지는 python 파일입니다
+
+"""
+
 group: Grouper = Grouper()
 messageObj = Messages()
 
 
 @group.task(monthly.at("3rd") & time_of_day.at("14:00"))
 def send_mail():
+    """
+    chatbot을 통해 입력받은 tgday정보를 종합하여 메일로 전달합니다
+    """
     SendMergedTgday.sendMail("플랫폼개발3팀")
 
 
 @group.task(daily & (time_of_week.at("Fri") & time_of_day.at("09:40")))
 def sendWorkReportMail():
+    """
+    chatbot을 통해 입력받은 업무보고 파일을 종합하여 메일로 전달합니다
+    """
     MergeWorkReport.makeMergePPTX()
     MergeWorkReport.sendMail("플랫폼개발3팀")
 
 
 @group.task(daily & (time_of_week.at("Fri") & time_of_day.at("09:00")))
 def sendWorkReport(db=Session()):
+    """
+    chatbot을 통해 주간 업무보고 메세지를 전달하여 안내합니다
+    """
     results = db.query(Users.user_room_info).all()
     for result in results:
         if result.user_room_info == "" or result.user_room_info == None:
@@ -39,6 +53,9 @@ def sendWorkReport(db=Session()):
 
 @group.task(monthly.at("1st") & time_of_day.at("09:00"))
 def sendTgday(db=Session()):
+    """
+    chatbot을 통해 tgday 메세지를 전달하여 안내합니다
+    """
     results = db.query(Users.user_room_info).all()
     for result in results:
         if result.user_room_info == "" or result.user_room_info == None:

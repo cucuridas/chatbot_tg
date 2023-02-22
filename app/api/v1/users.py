@@ -7,6 +7,10 @@ from app.core.db.base import *
 
 router: APIRouter = APIRouter(tags=["Users"])
 
+"""
+user 정보가 담겨져 있는 table의 값에 대해 관리하는 API 입니다
+"""
+
 
 @router.post("/users", name="user 정보 추가", response_model=ResponseUsers)
 async def register_users(req: UserBase, db: Session = Depends(get_db)):

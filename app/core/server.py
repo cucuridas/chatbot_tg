@@ -12,6 +12,11 @@ from app.api.v1.scheduler import router as scheduler_router
 from app.util.webex import WebexHook
 
 
+"""
+fastapi 서버를 실행 시키는 파일입니다
+"""
+
+
 def createApp() -> FastAPI:
     WebexHook().addHook()
     fastApiServer = FastAPI()

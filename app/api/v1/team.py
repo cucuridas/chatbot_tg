@@ -8,6 +8,10 @@ from app.core.db.base import *
 
 router: APIRouter = APIRouter(tags=["team"])
 
+"""
+team 정보가 담겨져 있는 table의 값에 대해 관리하는 API 입니다
+"""
+
 
 @router.post("/team", name="team 정보 추가", response_model=ReqTeamInfoSchema)
 async def registTeam(req: ReqTeamInfoSchema, db: Session = Depends(get_db)):

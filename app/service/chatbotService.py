@@ -16,7 +16,8 @@ from app.util.controllRoominfo import ControllRoominfo
 
 
 """
-chatbot을 통해 발생된 webhook을 처리하는 클래스입니다
+chatbot을 통해 발생된 webhook을 처리하는 클래스입니다 서비스 클래스 앞에서 먼저 처리해야할 로직들을 처리합니다
+ex) 서비스를 요청한 유저가 등록되어진 유저인가?, 진행중인 서비스에 알맞는 입력값이 전달되었는가?
 
 """
 

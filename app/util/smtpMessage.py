@@ -11,7 +11,7 @@ class SendMessage(SmtpConnetion):
         super().__init__()
         self.getConnection()
 
-    def writeEmail(self, title, content, csvFilePath: Optional[str] = None):
+    def writeEmail(self, title, content, filePath: Optional[str] = None):
         message = MIMEMultipart()
         message["Subject"] = title
         message["From"] = self.email_addr  # 보내는 사람의 이메일 계정
@@ -20,11 +20,12 @@ class SendMessage(SmtpConnetion):
         content_part = MIMEText(content, "plain")
         message.attach(content_part)
 
-        if csvFilePath != None:
-            with open(csvFilePath, "rb") as csv_file:
+        if filePath != None:
+            with open(filePath, "rb") as csv_file:
                 attachment = MIMEApplication(csv_file.read())
                 # 첨부파일의 정보를 헤더로 추가
-                attachment.add_header("Content-Disposition", "attachment", filename=csvFilePath)
+                filename = filePath.split("/")[-1]
+                attachment.add_header("Content-Disposition", "attachment", filename=filename)
                 message.attach(attachment)
 
         # 4. 서버로 메일 보내기

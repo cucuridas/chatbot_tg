@@ -33,7 +33,7 @@ class WebexHook:
         }
 
         response = requests.post(url=self.url, headers=self.header, data=json.dumps(self.data))
-        response.raise_for_status()
+        # response.raise_for_status()
         logging.info("Success,add webhook")
 
         RedisClient().setContent("hookinfo", json.loads(response.text))

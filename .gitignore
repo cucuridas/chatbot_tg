@@ -210,4 +210,5 @@ data/
 logs.csv
 scheduler_log/
 *.csv
-workReport
+workReport/*주차
+*종합.pptx

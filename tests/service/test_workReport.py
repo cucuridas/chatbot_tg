@@ -7,7 +7,8 @@ sys.path.append("/Users/cucuridas/Desktop/chatbot_tg")
 from app.service.workReport import MergeWorkReport
 
 
-# MergeWorkReport.makeMergePPTX()
+MergeWorkReport.makeMergePPTX()
+MergeWorkReport.sendMail("플랫폼개발3팀")
 # if shape.text == "최충은" or shape.name == "표 3":
 # 제외 항목 Picture,Connector,ActionSetting
 # 추가 항목 autoshape.Shape,GrapicFrame

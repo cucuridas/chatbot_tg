@@ -31,37 +31,44 @@ SERVICE_VALUE = {
 
 
 class ChatbotService:
-    async def checkService(roomId, message, conn=None):
+    async def checkService(message, conn=None):
         """
         webhook event를 통해 조회한 메세지 정보에서 유저가 원하는 서비스가 무엇인지 확인하여
         전달해주는 함수입니다 찾는 과정에서 user의 db 정보와 redis의 room 정보가 갱신됩니다
 
         Args:
-            roomId (str): webex webhook을 통해 전달받은 roomId 정보입니다
-            message (dict): webhook event를 통해 조회한 message 내용입니다
+
+            message (dict): webhook event를 data에 담긴 정보입니다
             conn (object, optional): 로직처리 후 chatbot을 통해 응답해주기위한 connection 객체입니다
 
         Returns:
             chatbot을 통해 메세지 전송
         """
-        value = await Match().match(message)
+        value = await Match().match(message["text"])
         if value is None:
-            return conn.postMessage(roomId, "</br> <h4>확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~<h4>")
+            return conn.postMessage(
+                message["roomId"], "</br> <h4>확인된 서비스가 없어요! 아직 제공중인 서비스가 아닌것 같네요~<h4>"
+            )
         else:
             result = value["service"]
-            redis_value = ControllRoominfo.addServiceRoominfo(roomId, value)
+            redis_value = ControllRoominfo.addServiceRoominfo(message["roomId"], value)
 
             db = Session()
             user_info = db.query(Users).filter(Users.user_email == redis_value["personEmail"])
-            user_info.update({"user_room_info": roomId})
-            ControllRoominfo.addServiceRoominfo(roomId, {"user_name": user_info.first().user_name})
+            user_info.update(
+                {Users.user_room_info: message["roomId"], Users.user_id: message["personId"]}
+            )
+
+            ControllRoominfo.addServiceRoominfo(
+                message["roomId"], {"user_name": user_info.first().user_name}
+            )
             db.commit()
 
-            redis_value.update({"roomId": roomId})
+            redis_value.update({"roomId": message["roomId"]})
             return_service = await ChatbotService.returnMessage(SERVICE_VALUE[result], redis_value)
 
             return conn.postMessage(
-                roomId,
+                message["roomId"],
                 f"요청하신 서비스가 '{result}' 인듯해요!\n 요청하신 서비스가 아니시라면 no[소문자]를 입력해주세요 \n {return_service}",
             )
 

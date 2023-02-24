@@ -29,14 +29,14 @@ class Tgday:
         redis_value = CONN.getContent(roomId)
         year, month, day = message["text"].split("-")
         registDate = date(year=int(year), month=int(month), day=int(day))
-        webexId = redis_value["personId"]
+        # webexId = redis_value["personId"]
 
         value = db.query(Users).filter(Users.user_email.like(redis_value["personEmail"])).first()
 
         if Tgday.checkTgday(db, value.user_name):
             Tgday.updateTgday(value.user_name, registDate, conn, roomId, db)
         else:
-            Tgday.registTgday(value.user_name, registDate, webexId, conn, roomId, db)
+            Tgday.registTgday(value.user_name, registDate, conn, roomId, db)
 
     def checkTgday(db, userName):
         if db.query(model_tg).filter(model_tg.user_name == userName).first() != None:
@@ -44,11 +44,11 @@ class Tgday:
         else:
             return False
 
-    def registTgday(userName, registDate, webexId, conn, roomId, db):
+    def registTgday(userName, registDate, conn, roomId, db):
         data = {
             "user_name": userName,
             "tgday_regist_day": registDate,
-            "user_id_webex": webexId,
+            # "user_id_webex": webexId,
         }
         tgdayInfo = model_tg(**data)
         db.add(tgdayInfo)

@@ -21,6 +21,8 @@ pydantic = "^1.10.4"
 psycopg2-binary = "^2.9.5"
 rocketry = "^2.5.1"
 python-pptx = "^0.6.21"
+asyncpg = "^0.27.0"
+greenlet = "^2.0.2"
 
 
 [tool.poetry.group.dev.dependencies]

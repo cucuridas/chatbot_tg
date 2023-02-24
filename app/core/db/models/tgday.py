@@ -18,4 +18,4 @@ class Tgday(Base):
 
     user_name = Column(String(80), primary_key=True, nullable=False)
     tgday_regist_day = Column(Date())
-    user_id_webex = Column(String(1000))
+    # user_id_webex = Column(String(1000))

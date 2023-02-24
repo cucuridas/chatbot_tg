@@ -15,3 +15,4 @@ class Users(Base):
     user_email = Column(String(300), nullable=False)
     user_room_info = Column(String(1000))
     user_team = Column(String(20), nullable=False)
+    user_id = Column(String(1000))
